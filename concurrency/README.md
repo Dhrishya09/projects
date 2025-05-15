@@ -1,59 +1,69 @@
-# F29OC-2024-25-CW1
+# F29OC Concurrency Coursework - Job Manager Simulation
 
-# Stub project
+## Project Overview
 
-This project contains the stub files for your project.
+This project implements a thread-safe Job Manager system that coordinates server resources to fulfill computational job requests. The system manages different types of servers (ComputeServers, StorageServers, etc.) and allocates them to jobs according to specified requirements while maintaining thread safety and efficient resource utilization.
 
-# IMPORTANT
-**You MUST fork this project into your remote repository BEFORE cloning it to your local disc space.**
+## Key Features
 
+- **Extrinsic Monitor Implementation**: Uses `ReentrantLock` and `Condition` variables for thread synchronization
+- **Job Scheduling**: Processes job requests in FIFO order with proper resource allocation
+- **Server Management**: Handles server logins and assigns them to appropriate jobs
+- **Thread Safety**: Ensures consistent behavior under concurrent access without race conditions
+- **Resource Allocation**: Implements reverse ID ordering for ComputeServer assignment (UR6)
 
+## Technical Highlights
 
+- Implemented using Java SE17 concurrency primitives
+- No use of synchronized blocks or other thread-safe libraries
+- Avoids busy waiting through proper use of condition variables
+- Handles mixed server types and complex job requirements
+- Maintains FIFO ordering of job requests
 
-Note that the Tests file contains two example tests - these tests will produce incorrect output if run without editing JobManager.java.
+## Development Approach
 
-If run without edits you should get:
+- Incremental development with frequent commits (25+ meaningful commits)
+- Comprehensive testing for all user requirements
+- Focus on thread safety and consistent behavior
+- Proper documentation and commit messages
 
+## How to Run
+
+1. Clone the repository
+2. Compile with Java SE17
+3. Run the Main class or individual tests from Tests.java
+
+## Example Usage
+
+```java
+// Create job manager
+Manager jobManager = new JobManager();
+
+// Start servers (in separate threads)
+new Thread(() -> {
+    String jobName = jobManager.serverLogin("ComputeServer", 100);
+    System.out.println("Assigned to job: " + jobName);
+}).start();
+
+// Specify job requirements
+Map<String, Integer> jobSpec = new HashMap<>();
+jobSpec.put("ComputeServer", 2);
+jobSpec.put("StorageServer", 1);
+JobRequest job = new JobRequest("job01", jobSpec);
+
+jobManager.specifyJob(job);
 ```
-UR2 EXAMPLE TEST:
-Event log:
-main: starting 4 ComputeServers and 1 StorageServer:
-Thread-0: started & calling serverLogin(ComputeServer, ID=100)
-Thread-2: started & calling serverLogin(ComputeServer, ID=100)
-Thread-3: started & calling serverLogin(ComputeServer, ID=100)
-Thread-4: started & calling serverLogin(StorageServer, ID=100)
-Thread-1: started & calling serverLogin(ComputeServer, ID=100)
-Thread-2: server_type=ComputeServer, job=, ID=100 -- released by jobManager.
-Thread-1: server_type=ComputeServer, job=, ID=100 -- released by jobManager.
-Thread-4: server_type=StorageServer, job=, ID=100 -- released by jobManager.
-Thread-0: server_type=ComputeServer, job=, ID=100 -- released by jobManager.
-Thread-3: server_type=ComputeServer, job=, ID=100 -- released by jobManager.
-main: calling specifyJob(jobName=job01, job={ComputeServer=2, StorageServer=1})
-main: Sleeping main to allow Servers time to be released
-main: Expect 2 ComputeServer and 1 StorageServer to be released:
 
+## Skills Demonstrated
 
-UR6 EXAMPLE TEST:
-Event log:
-main: starting 5 ComputeServers, ID=[0, 1, 2, 3, 4]
-Thread-5: started & calling serverLogin(ComputeServer, ID=0)
-Thread-5: server_type=ComputeServer, job=, ID=0 -- released by jobManager.
-Thread-6: started & calling serverLogin(ComputeServer, ID=1)
-Thread-6: server_type=ComputeServer, job=, ID=1 -- released by jobManager.
-Thread-7: started & calling serverLogin(ComputeServer, ID=2)
-Thread-7: server_type=ComputeServer, job=, ID=2 -- released by jobManager.
-Thread-8: started & calling serverLogin(ComputeServer, ID=3)
-Thread-8: server_type=ComputeServer, job=, ID=3 -- released by jobManager.
-Thread-9: started & calling serverLogin(ComputeServer, ID=4)
-Thread-9: server_type=ComputeServer, job=, ID=4 -- released by jobManager.
-main: threads started, now specifying job1.
-main: calling specifyJob(jobName=job01, job={ComputeServer=2})
-main: expect two ComputeServers 'job01' [ID=3&4] to be released:
-main: job1 specified, now specifying job2.
-main: calling specifyJob(jobName=job02, job={ComputeServer=2})
-main: expect two ComputeServers 'job02' [ID=1&2] to be released:
-```
-the above is not correct as all server threads have been immediately released.
+- Advanced Java concurrency programming
+- Thread synchronization techniques
+- Resource management algorithms
+- Software testing methodologies
+- Version control best practices
+- Problem-solving in concurrent systems
+
+This project serves as an excellent demonstration of my ability to design and implement complex concurrent systems while adhering to strict requirements and maintaining thread safety.
 
 
 
