@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "123810129294",
+    "firebase_url": "https://home-de76c-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "home-de76c",
+    "storage_bucket": "home-de76c.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:123810129294:android:d1c3f0b702a0c3dff470df",
+        "android_client_info": {
+          "package_name": "com.example.flutter_application_1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "123810129294-rtkdc8q7222i46th8m6mqjbtmp72dm1h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCuoTSM9admmxyEklrnSomJgMaMuc2l4uY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "123810129294-rtkdc8q7222i46th8m6mqjbtmp72dm1h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
